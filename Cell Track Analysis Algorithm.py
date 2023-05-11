@@ -20,7 +20,7 @@ from scipy.signal import argrelextrema
 
 # Imports and cleans up data
 
-df = pd.read_csv('/Users/sgjap/OneDrive/Desktop/sample_trajectory.csv')
+df = pd.read_csv('path/sample_trajectory.csv')
 df.columns =['Frame', 'x', 'y']
 
 
