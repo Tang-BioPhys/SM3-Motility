@@ -18,7 +18,7 @@ from scipy.signal import argrelextrema
 # In[6]:
 
 
-# Imports and cleans up data
+# Imports data
 
 df = pd.read_csv('path/sample_trajectory.csv')
 df.columns =['Frame', 'x', 'y']
