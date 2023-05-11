@@ -5,3 +5,5 @@ To run this program, download the file 'Cell Track Analysis Algorithm' in either
 Then, using your prefered GUI such as Spyder or Jupytr notebook, open the program and modify the file path in cell two labeled 'Imports data'
 
 Run every cell of the program by pressing Shift+Enter. You should see a velocity readout as well as multiple plots with accompanying run-and-tumble data
+
+If the program fails to run, try keeping the program file and the data file 'sample_trajectory.csv' in the same folder
