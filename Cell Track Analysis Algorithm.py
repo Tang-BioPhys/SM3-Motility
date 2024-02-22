@@ -15,16 +15,16 @@ import scipy.signal as ss
 from scipy.signal import argrelextrema
 
 
-# In[6]:
+# In[2]:
 
 
 # Imports data
 
-df = pd.read_csv('path/sample_trajectory.csv')
+df = pd.read_csv('/path/sample_trajectory.csv')
 df.columns =['Frame', 'x', 'y']
 
 
-# In[7]:
+# In[3]:
 
 
 # Calculates linear and angular speed
@@ -48,7 +48,7 @@ x = np.array(df['x'])
 y = np.array(df['y'])
 
 
-# In[8]:
+# In[4]:
 
 
 # Plots the trajectory. Plots the translational and angular velocity; unfiltered, filtered, and filtered overlaid. 
@@ -63,7 +63,7 @@ unfiltered_omega = df['omega']
 sg_filtered_omega = ss.savgol_filter(unfiltered_omega, window, poly)
 
 
-# In[9]:
+# In[5]:
 
 
 # Creates empty arrays to be filled with for loops
@@ -184,7 +184,7 @@ elif len(min[0]) < len(max[0]):
             t_tumble.append(min[0][i]) 
 
 
-# In[10]:
+# In[6]:
 
 
 # Calculates adjacent maxima for four different data types labeled by case
@@ -298,7 +298,7 @@ run_time = np.delete(run_time, 0)
 run_time = np.delete(run_time,-1)
 
 
-# In[11]:
+# In[7]:
 
 
 # Calculates tumble angles
@@ -353,7 +353,7 @@ for i in range(len(tumble_time)):
             if abs(ophi_arr[i-n]-iphi_arr[i-n]) <= 180:
                 tumble_angles.append(round(abs(ophi_arr[i-n]-iphi_arr[i-n]), 2))
 
-            elif abs(ophi_arr[i-n]-iphi_arr[i-n]) > 180: #this condition is for angles that are between 180 and 360. these should be subtracted from 360, and the sign should be positive for all of these (to keep consistent), in order to keep the angle as 180 - ImageJ angle output.
+            elif abs(ophi_arr[i-n]-iphi_arr[i-n]) > 180: 
                 tumble_angles.append(round(abs(360-abs(ophi_arr[i-n]-iphi_arr[i-n])), 2))
 
         if dif_iy_arr[i-n] > 0 and dif_oy_arr[i-n] < 0:
@@ -380,13 +380,47 @@ for i in range(len(tumble_time)):
             elif abs(-ophi_arr[i-n]+iphi_arr[i-n]) > 180:
                 tumble_angles.append(round(abs(360-abs(-ophi_arr[i-n]+iphi_arr[i-n])), 2))
     
-    else:
+    elif run_time[i-1] == 0 and i-1 >= 0:
         
         tumble_angles.append('See previous entry')                            
         n += 1
+        
+    elif run_time[i-1] == 0 and i-1 < 0:
+        
+        if dif_iy_arr[i-n] > 0 and dif_oy_arr[i-n] > 0:
+
+            if abs(ophi_arr[i-n]-iphi_arr[i-n]) <= 180:
+                tumble_angles.append(round(abs(ophi_arr[i-n]-iphi_arr[i-n]), 2))
+
+            elif abs(ophi_arr[i-n]-iphi_arr[i-n]) > 180: 
+                tumble_angles.append(round(abs(360-abs(ophi_arr[i-n]-iphi_arr[i-n])), 2))
+
+        if dif_iy_arr[i-n] > 0 and dif_oy_arr[i-n] < 0:
+
+            if abs(-ophi_arr[i-n]-iphi_arr[i-n]) <= 180:
+                tumble_angles.append(round(abs(-ophi_arr[i-n]-iphi_arr[i-n]), 2))
+
+            elif abs(-ophi_arr[i-n]-iphi_arr[i-n]) > 180:
+                tumble_angles.append(round(abs(360-abs(-ophi_arr[i-n]-iphi_arr[i-n])), 2))
+
+        if dif_iy_arr[i-n] < 0 and dif_oy_arr[i-n] > 0:
+
+            if abs(ophi_arr[i-n]+iphi_arr[i-n]) <= 180:
+                tumble_angles.append(round(abs(ophi_arr[i-n]+iphi_arr[i-n]), 2))
+
+            elif abs(ophi_arr[i-n]+iphi_arr[i-n]) > 180:
+                tumble_angles.append(round(abs(360-abs(ophi_arr[i-n]+iphi_arr[i-n])), 2))
+
+        if dif_iy_arr[i-n] < 0 and dif_oy_arr[i-n] < 0:
+
+            if abs(-ophi_arr[i-n]+iphi_arr[i-n]) <= 180:
+                tumble_angles.append(round(abs(-ophi_arr[i-n]+iphi_arr[i-n]), 2))
+
+            elif abs(-ophi_arr[i-n]+iphi_arr[i-n]) > 180:
+                tumble_angles.append(round(abs(360-abs(-ophi_arr[i-n]+iphi_arr[i-n])), 2))
 
 
-# In[12]:
+# In[8]:
 
 
 # Calculates average velocity
@@ -439,7 +473,7 @@ else:
 print('The average run velocity is:', np.round(avgvel,1), 'μm/s')
 
 
-# In[16]:
+# In[9]:
 
 
 # Plots relevant parameters. Frames in python are 4 frames behind. 
@@ -487,4 +521,10 @@ plt.show()
 print('The tumble times are:\n \n',tumble_time, '\n')
 print('The tumble angles are (deg.): \n \n', tumble_angles, '\n') 
 print('The run times are: \n \n', run_time)
+
+
+# In[ ]:
+
+
+
 
