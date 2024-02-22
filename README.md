@@ -1,4 +1,4 @@
-This is the python algorithm which was used to analyze cell track data for the publication 'Enterobacter Sp. SM3 Exhibits Run-and-Tumble Motility'. 
+This is the python algorithm which was used to analyze cell track data for the publication 'Enterobacter Sp. SM3 Exhibits Run-and-Tumble Motility'. Updated: February 21, 2024.
 
 DOI: 10.5281/zenodo.8066768
 
